@@ -1,2 +1,3 @@
-# github-issue-atsume
-GitHub の issue をあつめます
+# GitHub issue あつめ
+
+GitHub の issue をあつめます。
