@@ -10,6 +10,4 @@ RUN mkdir /myapp
 WORKDIR /myapp
 ADD Gemfile Gemfile
 ADD Gemfile.lock Gemfile.lock
-RUN bundle install --path vendor/bundle
-
-COPY . /myapp
+RUN bundle install
