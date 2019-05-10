@@ -6,7 +6,6 @@ class Api::Github
       response = connection.get("/repos/#{owner}/#{repo}/issues", {page: page}) do |request|
         # see: https://developer.github.com/v3/#conditional-requests
         if latest_response
-          puts "set ETag"
           request.headers['If-None-Match'] = latest_response.env.response_headers[:etag]
         end
       end
@@ -31,7 +30,7 @@ class Api::Github
       def connection
         @connection ||= Faraday.new(url: "https://api.github.com") do |builder|
           builder.response :logger, Rails.logger
-          builder.adapter  Faraday.default_adapter
+          builder.adapter Faraday.default_adapter
         end
       end
   end
