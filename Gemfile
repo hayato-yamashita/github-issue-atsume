@@ -55,11 +55,14 @@ end
 group :test do
   # For API spec
   gem 'webmock'
+
+  # For CircleCI
+  gem 'rspec_junit_formatter'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # To use GitHub API
-gem "faraday"
+gem 'faraday'
 gem 'faraday-http-cache'

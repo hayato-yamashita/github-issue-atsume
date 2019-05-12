@@ -1,0 +1,81 @@
+# Ruby CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-ruby/ for more details
+#
+version: 2.1
+
+workflows:
+  workflow:
+    jobs:
+      - rspec
+
+executors:
+  default:
+    docker:
+      - image: circleci/ruby:2.6.3-node-browsers
+        environment:
+          - RAILS_ENV: test
+          - APP_DATABASE_HOST: 127.0.0.1
+          - APP_DATABASE_USERNAME: root
+      - image: circleci/mysql:5.7
+        environment:
+          - MYSQL_ALLOW_EMPTY_PASSWORD: true
+
+jobs:
+  rspec:
+    executor: default
+    steps:
+      - checkout_with_cache
+      - bundle_install_with_cache
+
+      # Database setup
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
+      - run:
+          name: Database setup
+          command: |
+            bundle exec rake db:create db:schema:load --trace
+
+      # Run rspec
+      - run:
+          name: Run rspec
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            bundle exec rspec --format progress --format RspecJunitFormatter --out /tmp/test-results/rspec.xml --format progress $TEST_FILES
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+
+commands:
+  checkout_with_cache:
+    steps:
+      - restore_cache:
+          keys:
+            - git-cache-v1-{{ .Branch }}-{{ .Revision }}
+            - git-cache-v1-{{ .Branch }}
+            - git-cache-v1-
+      - checkout
+      - save_cache:
+          key: git-cache-v1-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - .git
+
+  bundle_install_with_cache:
+    steps:
+      - restore_cache:
+          keys:
+            - gem-cache-v1-{{ checksum "Gemfile.lock" }}
+            - gem-cache-v1-
+      - run:
+          name: Install dependencies
+          command: |
+            gem update bundler
+            bundle check --path=vendor/bundle || bundle install --path=vendor/bundle -j4
+      - save_cache:
+          key: gem-cache-v1-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
