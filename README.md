@@ -1,5 +1,7 @@
 # GitHub issue あつめ
 
+[![CircleCI](https://circleci.com/gh/hayato-yamashita/github-issue-atsume.svg?style=svg&circle-token=9ab9424cc15adf7e709b187e5ed1375af6f453ca)](https://circleci.com/gh/hayato-yamashita/github-issue-atsume)
+
 GitHub の issue をあつめます。
 
 ## Introduction
