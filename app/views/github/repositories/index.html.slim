@@ -1,0 +1,19 @@
+h1 Listing github_repositories
+
+table
+  thead
+    tr
+      th Owner
+      th Repo
+      th
+
+  tbody
+    - @github_repositories.each do |github_repository|
+      tr
+        td = github_repository.owner
+        td = github_repository.repo
+        td = link_to 'Destroy', github_repository, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Repository', new_github_repository_path
