@@ -8,7 +8,7 @@ GitHub の issue をあつめます。
 
 ```bash
 docker-compose build
-docker-compose run --rm web bundle exec rails db:migrate
+docker-compose run --rm web bin/rails db:migrate
 ```
 
 ## Usage
@@ -16,7 +16,7 @@ docker-compose run --rm web bundle exec rails db:migrate
 ### CLI
 
 ```bash
-docker-compose run --rm web bundle exec rake rails_issues:puts_csv
+docker-compose run --rm web bin/rake rails_issues:puts_csv
 ```
 
 <details>
