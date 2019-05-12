@@ -67,3 +67,4 @@ gem 'faraday'
 gem 'faraday-http-cache'
 
 gem 'slim-rails'
+gem 'bulma-rails'
