@@ -66,3 +66,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # To use GitHub API
 gem 'faraday'
 gem 'faraday-http-cache'
+
+gem 'slim-rails'
