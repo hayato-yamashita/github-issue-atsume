@@ -1,7 +1,9 @@
 doctype html
 html
   head
-    title Myapp
+    title GitHub Issue あつめ
+    meta name="viewport" content="width=device-width, initial-scale=1"
+
     = csrf_meta_tags
     = csp_meta_tag
 
@@ -9,4 +11,16 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   body
-    = yield
+    nav.navbar.is-primary aria-label="main navigation"
+      .navbar-brand
+        = link_to 'GitHub Issue あつめ', root_path, class: 'navbar-item has-text-weight-bold'
+    section.section
+      .container
+        = render 'notice'
+        = yield
+    footer.footer
+      .content.has-text-centered
+        - owner = 'hayato-yamashita'
+        - repo = 'github-issue-atsume'
+        = link_to Github::Repository.html_url(owner, repo), target: '_blank'
+          = Github::Repository.display_name(owner, repo)

@@ -1,5 +1,7 @@
-h1 New github_repository
+.content
+  = link_to 'Back', root_path
 
-== render 'form'
+.content
+  h1.title Create a new GitHub repository
 
-= link_to 'Back', github_repositories_path
+  .content = render 'form', repository: @repository

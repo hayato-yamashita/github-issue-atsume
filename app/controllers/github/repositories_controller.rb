@@ -1,22 +1,27 @@
 class Github::RepositoriesController < ApplicationController
-  before_action :set_github_repository, only: [:destroy]
+  before_action :set_repository, only: [:destroy, :fetch]
+  before_action :set_repository_with_issues, only: [:show]
 
   # GET /github/repositories
   def index
-    @github_repositories = Github::Repository.all
+    @repositories = Github::Repository.all
+  end
+
+  # GET /github/repositories/1
+  def show
   end
 
   # GET /github/repositories/new
   def new
-    @github_repository = Github::Repository.new
+    @repository = Github::Repository.new
   end
 
   # POST /github/repositories
   def create
-    @github_repository = Github::Repository.new(github_repository_params)
+    @repository = Github::Repository.new(repository_params)
 
-    if @github_repository.save
-      redirect_to @github_repository, notice: 'Repository was successfully created.'
+    if @repository.save
+      redirect_to root_url, notice: 'Repository was successfully created.'
     else
       render :new
     end
@@ -24,18 +29,32 @@ class Github::RepositoriesController < ApplicationController
 
   # DELETE /github/repositories/1
   def destroy
-    @github_repository.destroy
-    redirect_to github_repositories_url, notice: 'Repository was successfully destroyed.'
+    @repository.destroy
+    redirect_to root_url, notice: 'Repository was successfully destroyed.'
+  end
+
+  # POST /github/repositories/1/fetch
+  def fetch
+    if @repository.refresh_issues
+      redirect_to @repository, notice: 'Repository issues was successfully fetched.'
+    else
+      redirect_to @repository, alert: 'Ooops! issues was unsuccessfully fetched.'
+    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_github_repository
-      @github_repository = Github::Repository.find(params[:id])
+    def set_repository
+      @repository = Github::Repository.find(params[:id])
+    end
+
+    # Use callbacks to share common setup or constraints between actions.
+    def set_repository_with_issues
+      @repository = Github::Repository.eager_load(:issues).find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
-    def github_repository_params
+    def repository_params
       params.require(:github_repository).permit(:owner, :repo)
     end
 end

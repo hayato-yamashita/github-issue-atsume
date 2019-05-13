@@ -1,19 +1,21 @@
-h1 Listing github_repositories
+h1.title GitHub repositories
 
-table
-  thead
-    tr
-      th Owner
-      th Repo
-      th
+.content
+  - if @repositories.empty?
+    = empty_message
+  - else
+    table.table.is-striped.is-hoverable
+      thead
+        tr
+          th Repository
+          th
+      tbody
+        - @repositories.each do |repository|
+          tr
+            td = link_to repository.display_name, repository
+            td = link_to 'Delete', repository, data: { confirm: 'Are you sure?' }, method: :delete, class: 'has-text-danger'
 
-  tbody
-    - @github_repositories.each do |github_repository|
-      tr
-        td = github_repository.owner
-        td = github_repository.repo
-        td = link_to 'Destroy', github_repository, data: { confirm: 'Are you sure?' }, method: :delete
+hr
 
-br
-
-= link_to 'New Repository', new_github_repository_path
+.content
+  = link_to 'New', new_github_repository_path, class: "button is-primary"
