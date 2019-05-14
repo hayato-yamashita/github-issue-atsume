@@ -29,7 +29,9 @@ class Github::Repository < ApplicationRecord
 
       return true
     rescue => e
-      logger.error e
+      logger.error e.class
+      logger.error e.message
+      logger.error e.backtrace.join("\n")
     end
 
     false
