@@ -29,8 +29,11 @@ class Github::RepositoriesController < ApplicationController
 
   # DELETE /github/repositories/1
   def destroy
-    @repository.destroy
-    redirect_to root_url, notice: 'Repository was successfully destroyed.'
+    if @repository.destroy
+      redirect_to root_url, notice: 'Repository was successfully destroyed.'
+    else
+      redirect_to root_url, alert: @repository.errors.full_messages[0]
+    end
   end
 
   # POST /github/repositories/1/fetch
