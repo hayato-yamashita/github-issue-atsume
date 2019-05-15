@@ -95,4 +95,4 @@ open http://localhost:3000/
 
 Display example (by root path)
 
-![top image](https://user-images.githubusercontent.com/12483929/57749991-52e3e480-771b-11e9-8074-a8b12a1bca91.png)
+![top image](https://user-images.githubusercontent.com/12483929/57763105-b716a080-773b-11e9-8330-096ef8109fac.png)
