@@ -1,7 +1,10 @@
 class Api::Github
   class << self
-    def repos_issues(owner:, repo:, page:)
-      connection.get("/repos/#{owner}/#{repo}/issues", {page: page})
+    def repos_issues(owner:, repo:, page:, per_page: nil)
+      params = { page: page }
+      params[:per_page] = per_page if per_page
+
+      connection.get("/repos/#{owner}/#{repo}/issues", params)
     end
 
     private

@@ -1,0 +1,21 @@
+h1.title GitHub repositories
+
+.content
+  - if @repositories.empty?
+    = empty_message
+  - else
+    table.table.is-striped.is-hoverable
+      thead
+        tr
+          th Repository
+          th
+      tbody
+        - @repositories.each do |repository|
+          tr
+            td = link_to repository.display_name, repository
+            td = link_to 'Delete', repository, data: { confirm: 'Are you sure?' }, method: :delete, class: 'has-text-danger'
+
+hr
+
+.content
+  = link_to 'New', new_github_repository_path, class: "button is-primary"

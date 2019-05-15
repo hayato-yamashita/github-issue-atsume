@@ -1,0 +1,26 @@
+= form_for repository do |f|
+  .field
+    - if repository.errors.any?
+      article.message.is-danger#error_explanation
+        .message-body
+          .conent
+            strong = "#{pluralize(repository.errors.count, "error")} prohibited this github_repository from being saved:"
+          ul
+            - repository.errors.full_messages.each do |message|
+              li = message
+
+  .field
+    .control
+      .field.has-addons
+        .control
+          = f.text_field :owner, placeholder: 'owner', class: 'input'
+        .control
+          span.button.is-static = "/"
+        .control
+          = f.text_field :repo, placeholder: 'repo', class: 'input'
+    p.help This field is required
+
+  hr
+
+  .field
+    = f.submit class: 'button is-primary'

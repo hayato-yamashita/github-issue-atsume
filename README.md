@@ -8,7 +8,7 @@ GitHub の issue をあつめます。
 
 ```bash
 docker-compose build
-docker-compose run --rm web bundle exec rails db:migrate
+docker-compose run --rm web bin/setup
 ```
 
 ## Usage
@@ -16,13 +16,13 @@ docker-compose run --rm web bundle exec rails db:migrate
 ### CLI
 
 ```bash
-docker-compose run --rm web bundle exec rake rails_issues:puts_csv
+docker-compose run --rm web bin/rake rails_issues:puts_csv
 ```
 
 <details>
-<summary>example</summary>
+<summary>Response example</summary>
 
-```bash
+```csv
 Exclude mailer preview classes,Because mailer preview classes don't follow namesp,https://github.com/rails/rails/pull/36256
 Remove SQLite savepoint suppor,Spotted when reviewing https://github.com/rails/ra,https://github.com/rails/rails/pull/36255
 Use a single term instead of a,"Fixes #36233.
@@ -82,3 +82,17 @@ Rails attribute API typecast i,"### Steps to reproduce
 # frozen_string_l",https://github.com/rails/rails/issues/36199
 ```
 </details>
+
+### Web
+
+```bash
+docker-compose up -d
+```
+
+```bash
+open http://localhost:3000/
+```
+
+Display example (by root path)
+
+![top image](https://user-images.githubusercontent.com/12483929/57749991-52e3e480-771b-11e9-8074-a8b12a1bca91.png)

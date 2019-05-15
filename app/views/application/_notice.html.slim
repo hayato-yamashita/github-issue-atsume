@@ -1,0 +1,24 @@
+- if flash[:notice]
+  .notification.is-info
+    button.delete
+    p
+      strong = "Notice: "
+      = flash[:notice]
+
+- if flash[:alert]
+  .notification.is-danger
+    button.delete
+    p
+      strong = "Alert: "
+      = flash[:alert]
+
+- if flash[:notice] || flash[:alert]
+  javascript:
+    document.addEventListener('turbolinks:load', function() {
+      var elements = document.querySelectorAll('.notification > .delete')
+      for (var element of elements) {
+        element.addEventListener('click', function(e) {
+          e.target.parentNode.classList.add('is-hidden')
+        })
+      }
+    })
