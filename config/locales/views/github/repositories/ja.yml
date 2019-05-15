@@ -1,0 +1,23 @@
+ja:
+  github:
+    repositories:
+      index:
+        title: "GitHub リポジトリの一覧"
+        note: GitHub リポジトリを登録して、その issue を取得できます。
+        new: 登録
+        delete: 削除する
+      show:
+        fetch: 取得
+        fetch_note: "GitHub API を使って、最新%{count}件の issue を取得します。"
+        danger_zone:
+          title: Danger Zone
+          delete:
+            title: GitHub リポジトリの削除
+            note: 削除すると元に戻せないため、よく確認の上で実行してください。
+            delete: 削除
+      new:
+        title: 新しい GitHub リポジトリの登録
+      form:
+        error_message: "%{count}つのエラーが発生したため、保存できませんでした。"
+        owner_repo_help: 必須項目です
+        submit: hoge

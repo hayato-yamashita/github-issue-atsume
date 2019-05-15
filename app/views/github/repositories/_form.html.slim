@@ -4,21 +4,22 @@
       article.message.is-danger#error_explanation
         .message-body
           .conent
-            strong = "#{pluralize(repository.errors.count, "error")} prohibited this github_repository from being saved:"
+            strong = t('.error_message', count: repository.errors.count)
           ul
             - repository.errors.full_messages.each do |message|
               li = message
 
   .field
+    label.label = Github::Repository.human_attribute_name(:display_name)
     .control
       .field.has-addons
         .control
-          = f.text_field :owner, placeholder: 'owner', class: 'input'
+          = f.text_field :owner, placeholder: Github::Repository.human_attribute_name(:owner), class: 'input'
         .control
-          span.button.is-static = "/"
+          span.button.is-static = '/'
         .control
-          = f.text_field :repo, placeholder: 'repo', class: 'input'
-    p.help This field is required
+          = f.text_field :repo, placeholder: Github::Repository.human_attribute_name(:repo), class: 'input'
+    p.help = t('.owner_repo_help')
 
   hr
 
