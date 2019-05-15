@@ -1,0 +1,10 @@
+ja:
+  github:
+    repositories:
+      create:
+        success: 登録に成功しました。
+      destroy:
+        success: 削除に成功しました。
+      fetch:
+        success: 取得に成功しました。ただし、取得に成功しても issue が存在しない場合もあります。
+        failure: おっと、取得中にエラーが発生しました。対象が存在しない可能性があります。

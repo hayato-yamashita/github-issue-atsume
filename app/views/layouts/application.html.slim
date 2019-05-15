@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title GitHub Issue あつめ
+    title = t('title')
     meta name="viewport" content="width=device-width, initial-scale=1"
 
     = csrf_meta_tags
@@ -13,7 +13,7 @@ html
   body
     nav.navbar.is-primary aria-label="main navigation"
       .navbar-brand
-        = link_to 'GitHub Issue あつめ', root_path, class: 'navbar-item has-text-weight-bold'
+        = link_to t('title'), root_path, class: 'navbar-item has-text-weight-bold'
     section.section
       .container
         = render 'notice'

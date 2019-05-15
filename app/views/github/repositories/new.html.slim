@@ -1,7 +1,6 @@
-.content
-  = link_to 'Back', root_path
+section.content
+  = link_to t('page_back'), root_path
 
-.content
-  h1.title Create a new GitHub repository
-
-  .content = render 'form', repository: @repository
+section.content
+  h1.title = t('.title')
+  = render 'form', repository: @repository

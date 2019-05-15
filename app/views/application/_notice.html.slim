@@ -1,18 +1,14 @@
-- if flash[:notice]
-  .notification.is-info
-    button.delete
-    p
-      strong = "Notice: "
-      = flash[:notice]
+ruby:
+  notification_class = { notice: 'is-info', alert: 'is-danger' }
+  notification_types = notification_class.keys
 
-- if flash[:alert]
-  .notification.is-danger
-    button.delete
-    p
-      strong = "Alert: "
-      = flash[:alert]
+- notification_types.each do |type|
+  - if flash[type]
+    = tag.div(class: ['notification', notification_class[type]])
+      button.delete
+      p = flash[type]
 
-- if flash[:notice] || flash[:alert]
+- if notification_types.any? {|type| flash[type] }
   javascript:
     document.addEventListener('turbolinks:load', function() {
       var elements = document.querySelectorAll('.notification > .delete')

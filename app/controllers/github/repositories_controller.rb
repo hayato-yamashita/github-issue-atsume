@@ -21,7 +21,7 @@ class Github::RepositoriesController < ApplicationController
     @repository = Github::Repository.new(repository_params)
 
     if @repository.save
-      redirect_to root_url, notice: 'Repository was successfully created.'
+      redirect_to root_url, notice: t('.success')
     else
       render :new
     end
@@ -30,7 +30,7 @@ class Github::RepositoriesController < ApplicationController
   # DELETE /github/repositories/1
   def destroy
     if @repository.destroy
-      redirect_to root_url, notice: 'Repository was successfully destroyed.'
+      redirect_to root_url, notice: t('.success')
     else
       redirect_to root_url, alert: @repository.errors.full_messages[0]
     end
@@ -39,9 +39,9 @@ class Github::RepositoriesController < ApplicationController
   # POST /github/repositories/1/fetch
   def fetch
     if @repository.refresh_issues
-      redirect_to @repository, notice: 'Repository issues was successfully fetched.'
+      redirect_to @repository, notice: t('.success')
     else
-      redirect_to @repository, alert: 'Ooops! issues was unsuccessfully fetched.'
+      redirect_to @repository, alert: t('.failure')
     end
   end
 

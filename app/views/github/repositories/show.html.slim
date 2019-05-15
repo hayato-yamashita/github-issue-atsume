@@ -1,27 +1,27 @@
-.content
-  = link_to 'Back', root_path
+section.content
+  = link_to t('page_back'), root_path
 
-h1.title
-  = link_to @repository.display_name, @repository.html_url, target: '_blank'
+section.content
+  h1.title
+    = link_to @repository.display_name, @repository.html_url, target: '_blank'
 
-.content
-  h2.subtitle = "#{pluralize(@repository.issues.count, 'issue')}"
-  .content
+section.content
+  section.content
     - if @repository.issues.empty?
       = empty_message
     - @repository.issues.each do |issue|
       section.box
         h2.subtitle = link_to issue.title, issue.html_url, target: '_blank'
         .content = simple_format(h(issue.body), {}, wrapper_tag: 'div')
-  .content
-    p = "Fetch #{pluralize(Github::Issue::FETCH_COUNT, 'latest issue')} from this repository using GitHub API."
-    = link_to 'Fetch issues', fetch_github_repository_path, method: :post, class: 'button is-primary'
+  section.content
+    p = t('.fetch_note', count: Github::Issue::FETCH_COUNT)
+    = link_to t('.fetch'), fetch_github_repository_path, method: :post, class: 'button is-primary'
 
 hr
 
-.content
-  h2.subtitle Danger Zone
+section.content
+  h2.subtitle = t('.danger_zone.title')
   .content
-    strong Delete this repository
-    p Once you delete a repository, there is no going back. Please be certain.
-    = link_to 'Delete this repository', @repository, data: { confirm: 'Are you sure?' }, method: :delete, class: 'button is-danger'
+    strong = t('.danger_zone.delete.title')
+    p = t('.danger_zone.delete.note')
+    = link_to t('.danger_zone.delete.delete'), @repository, data: { confirm: t('delete_confirm') }, method: :delete, class: 'button is-danger'

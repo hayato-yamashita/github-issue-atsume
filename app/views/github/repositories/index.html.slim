@@ -1,21 +1,22 @@
-h1.title GitHub repositories
+section.content
+  h1.title = t('.title')
+  p.content = t('.note')
 
-.content
   - if @repositories.empty?
     = empty_message
   - else
     table.table.is-striped.is-hoverable
       thead
         tr
-          th Repository
+          th = Github::Repository.human_attribute_name(:display_name)
           th
       tbody
         - @repositories.each do |repository|
           tr
             td = link_to repository.display_name, repository
-            td = link_to 'Delete', repository, data: { confirm: 'Are you sure?' }, method: :delete, class: 'has-text-danger'
+            td.has-text-right = link_to t('.delete'), repository, data: { confirm: t('delete_confirm') }, method: :delete, class: 'has-text-danger'
 
 hr
 
-.content
-  = link_to 'New', new_github_repository_path, class: "button is-primary"
+section.content
+  = link_to t('.new'), new_github_repository_path, class: 'button is-primary'

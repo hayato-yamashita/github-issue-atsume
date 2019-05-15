@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    attributes:
+      github/repository:
+        owner: オーナー
+        repo: リポジトリ
+        display_name: オーナー／リポジトリ
