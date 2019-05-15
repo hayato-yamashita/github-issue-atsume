@@ -68,3 +68,4 @@ gem 'faraday-http-cache'
 
 gem 'slim-rails'
 gem 'bulma-rails'
+gem 'rails-i18n', '~> 5.1'
